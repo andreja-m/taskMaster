@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<!--this one puts name in browser tab -->
+<title>Task Master</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+  <!--this one put title in the app and centers it -->
+  <h1 style="text-align: center">Task Master</h1>
+
+  <table>
+    <tr><!--table row-->
+      <!--create those 'boxes'-->
+      <th>Task</th><!--table header-->
+      <th>Added</th>
+      <th>Actions</th>
+    </tr>
+    {% for task in tasks %}
+      <tr>
+        <!--this also somehow return content, and below is date...-->
+        <td>{{ task.content }}</td>
+        <td>{{ task.date_created.date() }}</td>
+        <td>
+          <a href="/delete/{{task.id}}">Delete</a>
+          <br><!--delete and update links, br is break or space-->
+          <a href="/update/{{task.id}}">Update</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+  <!--this line below connect html with app method-->
+  <form action="/" method="POST">
+    <!--this creates text box-->
+    <input type="text" name="content" id="content">
+    <!--this creates that button-->
+    <input type="submit" value="Add Task">
+</div>
+{% endblock %}
